@@ -1,5 +1,6 @@
 <?php
-
+ 
+// Day 2
 // Data Type 
 
 // String
