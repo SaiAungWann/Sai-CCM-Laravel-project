@@ -1,47 +1,95 @@
 <?php
 
-// php => hypertext prossessing language
-// html => hypertext markup language
+// Data Type 
 
-// --------- What is Backend Development ---------
+// String
+echo "Hello World";
 
-// Backend Development is the process of developing and maintaining the server side of a website, dealing with the data that is stored on the server, server logic and APLs.
+// Number => Integer, Float
+// Integer  
+echo 123;
 
-// Server => Cloud Computer
+// Float
+echo 10.2;      
 
-// Client => Web Browser
+// Boolean
+echo true;      
+echo false;      
 
-// APLs => Application Programming Languages
+// Array    => [nurmaric array and associative array]
 
-// to use server need to have server side language to listen to request
+// nurmaric array
+$names = ["A", "B", "C"];
+var_dump($names); // result : array(3) { [0]=> string(1) "A" [1]=> string(1) "B" [2]=> string(1) "C" }
 
-// PHP is server side language use to listen the request from the client
+// associative array
+$person = [
+    "name" => "nurmaric",
+    "age" => 20]    
+    ;
+var_dump($person); // result : array(2) { ["name"]=> string(7) "nurmaric" ["age"]=> int(20) }
 
-// client => request => web browser(url, "/") => server => php => server response (html)=> client
+// object 
+$car = new stdClass();
+$car->name = "bmw";
+$car->color = "black";
+var_dump($car); // result : object(stdClass)#1 (2) { ["name"]=> string(3) "bmw" ["color"]=> string(5) "black" }
+echo $car->name; // result : bmw
 
-// why php
-// handle incoming request and give response proprely
-// handle to connect the database
-// high Demand
-// versatility => applicabel to many type of project (application , website and Apis)
+// null
+$null = null;
+var_dump($null); // result : null
 
-// data flow
-// fontend => backend => database => server
+// datastructure 
+// mostly use in project / larvel or other framework
+// => array of object
 
-// to run php
-// terminal => php -S localhost:8000 index.php
+$car1 = new stdClass();
+$car1->name = "bmw";
+$car1->color = "black";
 
-// if writing the php code in index.php without html code no need clode tag in index.php
-// but if writing the php code in index.php with html code or write the php code in index.html need clode tag in index.php
+$car2 = new stdClass();
+$car2->name = "toyota";
+$car2->color = "white";
 
-// variables => used to store data
-$name = "Mohan";
 
-echo $name; 
+$cars = [
+    $car1, $car2
+];
 
-// echo use to display the data in the browser with result only => result => Mohan
+echo($cars[0]->name); // result : bmw
 
-var_dump($name);
-// var_dump is a function use to display the data in the browser with result and type => result => string(5) "Mohan"
+// condition 
+// gate 
+
+// and / && => true + true = true
+// or / || => false + false = false
+// xor / !=  => false + true = true
+// not / ! => true => false
+
+// arithmetic 
+// + - * / % **
+
+// assignment 
+// = += -= *= /= %= **=
+
+// comparison 
+// == === != !== > < >= <=
+
+// increment / decrement
+// ++ --
+
+// concatenation
+// . .= 
+// to add string + string => "Sai" . "Aung" . "Wann" => result => "Sai Aung Wann"
+
+// ternary operator
+// condition ? true : false
+
+// if
+// if else
+// if elseif else
+
+
 
 ?>
