@@ -27,11 +27,13 @@ class CartController extends Controller
 
             $cart = auth()->user()->cart;
         }
+        $discounted_price = $product->price - $product->discounted_percentage / 100 * $product->price;
+
 
         $cart_item = new CartItem();
         $cart_item->cart_id = $cart->id;
         $cart_item->product_id = $product->id;
-        $cart_item->total_price = $product->price;
+        $cart_item->total_price = $discounted_price;
         $cart_item->save();
 
         // return redirect('/checkout');

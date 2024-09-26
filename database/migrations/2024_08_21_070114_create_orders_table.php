@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->enum('status', ['pending', 'processing', 'delivered', 'declined'])
+            $table->enum('status', ['pending', 'shipping', 'delivered', 'declined'])
                 ->default('pending');
             $table->float("total_amount");
             $table->string("shipping_address")->nullable(true);

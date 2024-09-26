@@ -377,8 +377,14 @@ textarea.input {
     transition: 0.2s all;
 }
 
-.section-tab-nav li.active a {
+.section-tab-nav li.active a .active {
     color: #d10024;
+}
+
+#responsive-nav .navbar-nav a.activeNow {
+    color: #d10024;
+    font-style: bold;
+    font-size: 18px;
 }
 
 .section-tab-nav li a:hover:after,

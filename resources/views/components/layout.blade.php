@@ -182,7 +182,10 @@
 												<div class="product-body">
 													<h3 class="product-name"><a href="/product-details/{{ $cart_item->product->id }}">{{$cart_item->product->name}}</a></h3>
 													<h4>hello</h4>
-													<h4 class="product-price"><span class="qty"></span>$ {{$cart_item->product->price}}</h4>
+													<h4 class="product-price"><span class="qty"></span>{{$cart_item->quantity}} x $ {{$cart_item->total_price}} =
+														<strong>$ {{$cart_item->quantity * $cart_item->total_price}}</strong>
+													</h4>
+													
 												</div>
 										<form action="/cart_items/{{$cart_item->id}}/delete" method="POST" class="delete">                
 											@csrf
@@ -203,7 +206,7 @@
 									<div class="cart-summary">
 										@if ($cart_items?->count())
 										<small>{{$cart_items->count()}} Item(s) selected</small>
-										<h5 class="text-black">SUBTOTAL: ${{$cart_items->sum('product.price')}}</h5>
+										<h5 class="text-black">SUBTOTAL: ${{$cart_items->sum('total_price')}}</h5>
 										@else
 										<h5>SUBTOTAL: $0</h5>
 										@endif
@@ -236,24 +239,24 @@
 	$productBrands = ProductBrand::all();
 	@endphp
 <!-- NAVIGATION -->
-{{-- <nav id="navigation">
+<nav id="navigation">
     <!-- container -->
     <div class="container">
         <!-- responsive-nav -->
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/categoryCollections">Categories</a></li>
-                <li><a href="/categoryCollections">Categories</a></li>
-            </ul>
+                <li><a href="/" class="{{ request()->routeIs('home') ? 'activeNow' : '' }}">Home</a></li>
+                <li><a href="/categoryCollections" class="{{ request()->routeIs('categoryCollections') ? 'activeNow' : '' }}">Categories</a></li>
+                <li><a href="/about-us" class="{{ request()->routeIs('about-us') ? 'activeNow' : '' }}">About Us</a></li>
+				<li><a href="/contact-us" class="{{ request()->routeIs('contact-us') ? 'activeNow' : '' }}">Contact Us</a></li>
             <!-- /NAV -->
         </div>
         <!-- /responsive-nav -->
     </div>
     <!-- /container -->
 </nav>
-<!-- /NAVIGATION --> --}}
+<!-- /NAVIGATION -->
 
 		{{-- alart box --}}
 		@if(session('success'))
@@ -277,7 +280,7 @@
 
 		<!-- NEWSLETTER -->
 		 <hr>	
-		<div id="newsletter" class="section">
+		 <div id="newsletter" class="section">
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -285,8 +288,8 @@
 					<div class="col-md-12">
 						<div class="newsletter">
 							<p>Need Help? <strong>CONTACT US</strong></p>
-							<form>
-								<input class="input" type="email" placeholder="Enter Your Email">
+							<form action="/contact-us">
+								<input class="input" name="email" type="email" placeholder="Enter Your Email">
 								<button class="newsletter-btn"><i class="fa fa-envelope"></i> Sent Email</button>
 							</form>
 							<ul class="newsletter-follow">
@@ -336,10 +339,15 @@
 								<h3 class="footer-title">Categories</h3>
 								<ul class="footer-links">
 									<li><a href="#">Hot deals</a></li>
-									<li><a href="#">Laptops</a></li>
-									<li><a href="#">Smartphones</a></li>
-									<li><a href="#">Cameras</a></li>
-									<li><a href="#">Accessories</a></li>
+		
+									@php
+										$categories = \App\Models\Category::all();
+									@endphp
+
+									@foreach ($categories as $category)
+
+									<li> <a href="/categories/{{$category->name}}/show">{{$category->name}}</a></li>
+               						 @endforeach
 								</ul>
 							</div>
 						</div>
@@ -350,11 +358,11 @@
 							<div class="footer">
 								<h3 class="footer-title">Information</h3>
 								<ul class="footer-links">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Contact Us</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-									<li><a href="#">Orders and Returns</a></li>
-									<li><a href="#">Terms & Conditions</a></li>
+									<li><a href="/about-us">About Us</a></li>
+									<li><a href="/contact-us">Contact Us</a></li>
+									<li><a href="/privacy-and-policy">Privacy Policy</a></li>
+									<li><a href="/orders-and-return">Orders and Returns</a></li>
+									<li><a href="/terms-and-conditions">Terms & Conditions</a></li>
 								</ul>
 							</div>
 						</div>
@@ -363,11 +371,16 @@
 							<div class="footer">
 								<h3 class="footer-title">Service</h3>
 								<ul class="footer-links">
-									<li><a href="#">My Account</a></li>
-									<li><a href="#">View Cart</a></li>
-									<li><a href="#">Wishlist</a></li>
-									<li><a href="#">Track My Order</a></li>
-									<li><a href="#">Help</a></li>
+									<li>
+										{{-- {{ auth()->check() ? auth()->user()->email : request()->email }} --}}
+										<a href="{{ auth()->check() ? '/user/' . auth()->user()->full_name . '/profile' : '/login' }}">My Account</a></li>
+
+									<li><a href="/cart">View Cart</a></li>
+									<li><a href="/wishlist">Wishlist</a></li>
+									<li>
+
+										<a href="{{ auth()->check() ? '/user/' . auth()->user()->full_name . '/profile' : '/login' }}">Track My Order</a></li>
+									<li><a href="/contact-us">Help</a></li>
 								</ul>
 							</div>
 						</div>

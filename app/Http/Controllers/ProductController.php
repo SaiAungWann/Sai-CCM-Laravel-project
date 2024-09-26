@@ -13,12 +13,19 @@ class ProductController extends Controller
 {
     public function index()
     {
+        $category = Category::all()->load("products");
+        $topSellingProductsOne = $category->find(1)->products()->where('top_seller', true)->take(3)->get();
+        $topSellingProductsTwo = $category->find(2)->products()->where('top_seller', true)->take(3)->get();
+        $topSellingProductsThree = $category->find(3)->products()->where('top_seller', true)->take(3)->get();
         return view('home', [
             "products" => Product::orderBy("id", "desc")->get()->load("category"),
             "newArrivalProducts" => Product::all()->where("new_arrival", "LIKE", true)->load("category"),
-            "categories" => Category::all()->load("products"),
+            "categories" => $category,
             'productBrands' => ProductBrand::all(),
             'topSellingProducts' => Product::where('top_seller', true)->get()->load('category'),
+            'topSellingProductsOne' => $topSellingProductsOne,
+            'topSellingProductsTwo' => $topSellingProductsTwo,
+            'topSellingProductsThree' => $topSellingProductsThree,
         ]);
     }
     public function show(Product $product)

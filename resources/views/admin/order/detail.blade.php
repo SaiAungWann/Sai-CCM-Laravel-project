@@ -31,8 +31,8 @@
                                 <td class="text-left">{{$orderItem->product->id}}</td>
                                 <td class="text-left">{{$orderItem->product->name}}</td>
                                 <td class="text-left">{{$orderItem->product->in_stock}} <p>In Stock</p></td>
-                                <td> {{$orderItem->product->quantity}} <p>Quantity</p></td>
-                                <td>$ {{$orderItem->product->price}}</td>
+                                <td> {{$orderItem->quantity}}</td>
+                                <td>$ {{$orderItem->total_price}}</td>
                                 <td>
 
                                 </td>
@@ -57,20 +57,20 @@
                                 <td class="text-left"></td>
                                 <td class="text-left"></td>
                                 @if ($orderItems?->count())
-                                <td>$ {{$orderItems->sum('product.price')}}</td>
+                                <td>$ {{$orderItems->sum('total_price')}}</td>
                                 @else
                                 <td>$ 0</td>
                                 @endif
                                 <td>                                     
                                     <ul class="order-status">
                                         <li class="nav-item dropdown">
-                                            <select name="status" id="status"                         class="custom-select tm-select-accounts text-center text-white"> 
-                                                <option value="pending" selected class="space-y-6 ">Pending</option>
-                                                <option value="processing">
-                                                    Processing
+                                            <select name="status" id="status" class="custom-select tm-select-accounts text-center text-white"> 
+                                                <option value="pending" {{ $order->status == 'pending' ? 'selected' : ''}} class="space-y-6 ">Pending</option>
+                                                <option value="shipping" {{ $order->status == 'shipping' ? 'selected' : ''}} >
+                                                    Shipping
                                                 </option>
-                                                <option value="delivered">Delivered</option>
-                                                <option value="declined">declined</option>
+                                                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : ''}}>Delivered</option>
+                                                <option value="declined" {{ $order->status == 'declined' ? 'selected' : ''}}>declined</option>
                                             </select>
                                         </li>
                                     </ul></td>

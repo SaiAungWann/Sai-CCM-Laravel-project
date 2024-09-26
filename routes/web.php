@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductBrandController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
+use App\Http\Controllers\EmailConrtoller;
 use App\Http\Middleware\MustBeLoginUser;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -52,13 +53,13 @@ Route::delete('/admin/brand/{brand}/delete', [ProductBrandController::class, "de
 Route::get('/admin/account', [AdminDashBoardController::class, "adminAccount"]);
 
 // User Pannel 
-Route::get('/', [ProductController::class, "index"]);
+Route::get('/', [ProductController::class, "index"])->name('home');
 
 Route::get('/product-details/{product}', [ProductController::class, "show"]);
 Route::get('/store', [ProductController::class, "store"]);
 Route::get('/store/search', [ProductController::class, "search"]);
 Route::get('/categories/{category:name}/show', [CategoryController::class, "index"]);
-Route::get('/categoryCollections', [CategoryController::class, "allCategories"]);
+Route::get('/categoryCollections', [CategoryController::class, "allCategories"])->name('categoryCollections');
 
 Route::get('/login', [LoginController::class, "create"]);
 
@@ -90,3 +91,13 @@ Route::get('/locale/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return back();
 });
+
+
+// Email ......
+Route::get('/sent-email/order/confirm', [EmailConrtoller::class, 'orderConfirm']);
+Route::post('/sent-email/contact', [EmailConrtoller::class, 'contact']);
+Route::get('/contact-us', [EmailConrtoller::class, 'contact_us'])->name('contact-us');
+Route::get('/about-us', [EmailConrtoller::class, 'about_us'])->name('about-us');
+Route::get('/privacy-and-policy', [EmailConrtoller::class, 'privacy_and_policy']);
+Route::get('/terms-and-conditions', [EmailConrtoller::class, 'terms_and_conditions']);
+Route::get('/orders-and-return', [EmailConrtoller::class, 'order_and_return']);

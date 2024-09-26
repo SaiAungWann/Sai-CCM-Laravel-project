@@ -164,9 +164,6 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-3">
 						<div>
 							<!-- product widget -->
-							@php
-								$topSellingProductsOne = $category->find(1)->products()->where('top_seller', true)->take(3)->get();
-								@endphp
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">
@@ -193,9 +190,6 @@
 						</div>
 						<div>
 							<!-- product widget -->
-							@php
-								$topSellingProductsTwo = $category->find(2)->products()->where('top_seller', true)->take(3)->get();
-								@endphp
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">
@@ -233,9 +227,6 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-4">
 						<div>
 							<!-- product widget -->
-							@php
-								$topSellingProductsThree = $category->find(3)->products()->where('top_seller', true)->take(3)->get();
-								@endphp
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">

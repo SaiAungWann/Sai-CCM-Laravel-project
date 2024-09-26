@@ -18,7 +18,7 @@
 
               <tr class="w-full text-center border-b-2  h-10">
                     <td class="text-left">{{$wishListItem->product->name}}</td>
-                     <td class="text-center w-44 m-auto"><img src="{{asset('./access/img/product01.png')}}" class="img-fluid w-44 m-auto"></td>
+                     <td class="text-center w-44 m-auto"><img src="{{asset($wishListItem->product->image)}}" class="img-fluid w-44 m-auto"></td>
                     <td class="text-right">$ {{$wishListItem->product->price}}</td>
 
                     <td class="text-red-500 text-right"><a href="/">

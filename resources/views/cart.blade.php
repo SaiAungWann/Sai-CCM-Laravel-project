@@ -58,7 +58,7 @@
                           </td>
                          <td>
                            <span>$</span> 
-                           <span class="price" data-product-id="{{$cartItem->id}}">  {{$cartItem->product->price}}</span>
+                           <span class="price" data-product-id="{{$cartItem->id}}">  {{$cartItem->total_price}}</span>
                            
                            {{-- <input type="hidden" name="total_price[{{$cartItem->id}}]" id="total_price_input" data-product-id="{{$cartItem->id}}"> --}}
                            <td id="total-pirce">
