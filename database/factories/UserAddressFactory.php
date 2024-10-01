@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\StateOrRegion;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,16 +19,21 @@ class UserAddressFactory extends Factory
     public function definition(): array
     {
         $users = User::all();
+
+        $state_or_regions = StateOrRegion::all();
+        $state_or_regions = ['Yangon', 'Mandalay', 'Naypyitaw', 'Ayeyarwady', 'Bago', 'Magway', 'Sagaing', 'Tanintharyi', 'Chin', 'Kachin', 'Kayah', 'Kayin', 'Mon', 'Rakhine', 'Shan'];
+        $city = ['Yangon', 'Mandalay', 'Naypyitaw', 'Ayeyarwady', 'Bago', 'Magway', 'Sagaing', 'Tanintharyi', 'Hakha', 'Myitkyina', 'Loikaw', 'Hpa-An', 'Mawlamyine', 'Taunggyi', 'Suttwe'];
+        $township = ['Dekkhinathiri', 'Lewe', 'Pyinmana', 'Tatkon', 'Zeyathiri', 'Pobbathiri', 'Zabuthiri'];
+
         return [
-            'name' => fake()->name(),
-            'user_id' => fake()->randomElement($users),
-            'country' => fake()->country(),
-            'state' => fake()->state(),
-            'city' => fake()->city(),
-            'street' => fake()->streetAddress(),
-            'zip_code' => fake()->postcode(),
-            'phone' => fake()->phoneNumber(),
+            'address_name' => fake()->word(3, true),
             'is_default' => fake()->boolean(),
+            'user_id' => fake()->randomElement($users),
+            'state_or_region_id' => StateOrRegion::factory(),
+            'city' => fake()->randomElement($city),
+            'address' => fake()->streetAddress(),
+            'zip_code' => fake()->postcode(),
+            'telephone' => fake()->phoneNumber(),
         ];
     }
 }

@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_product_brnad', function (Blueprint $table) {
-            $table->primary(['category_id', 'product_brand_id']);
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('product_brand_id');
+        Schema::create('state_or_regions', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_brnad');
+        Schema::dropIfExists('state_or_regions');
     }
 };

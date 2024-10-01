@@ -13,7 +13,7 @@
                     <div class="product">
                         <a href="/product-details/{{ $product->id }}">
                             <div class="product-img">
-                                <img src="{{asset($product->image)}}" alt="">
+                                <img src="{{asset($product->product_images->first()->product_image)}}" alt="">
                                 <div class="product-label">
                                     @if ($product->discounted_percentage > 0)
                                     <span class="sale">{{$product->discounted_percentage}} %</span>

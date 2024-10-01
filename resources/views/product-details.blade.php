@@ -1,11 +1,11 @@
 <x-layout>
 
-	<!-- BREADCRUMB -->
-	<!-- <div id="breadcrumb" class="section"> -->
-	<!-- container -->
-	<!-- <div class="container"> -->
-	<!-- row -->
-	<!-- <div class="row">
+	{{-- BREADCRUMB  --}}
+	<div id="breadcrumb" class="section"> 
+	{{-- container --> --}}
+	<div class="container"> 
+	{{-- row  --}}
+	<div class="row">
 					<div class="col-md-12">
 						<ul class="breadcrumb-tree">
 							<li><a href="#">Home</a></li>
@@ -15,59 +15,47 @@
 							<li class="active">Product name goes here</li>
 						</ul>
 					</div>
-				</div> -->
-	<!-- /row -->
-	<!-- </div> -->
-	<!-- /container -->
-	<!-- </div> -->
+				</div> 
+	{{-- /row  --}}
+	</div> 
+ {{-- /container  --}}
+	 </div> 
 	<!-- /BREADCRUMB -->
 
 	<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
-		<div class="container">
+		<div class="container ">
 			<!-- row -->
-			<div class="row">
+			<div class="row ">
 				<!-- Product main img -->
-				<div class="col-md-5 col-md-push-2">
+				<div class="col-md-5 col-md-push-2 ">
+					<br>
+					<br>
+					<br>
 					<div id="product-main-img">
+						@foreach ($product->product_images as $image)
+						
+							
 						<div class="product-preview">
-							<img src="{{asset('./access/img/product01.png')}}" alt="">
+							<img src="{{asset($image->product_image)}}" alt="">
 						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product03.pn')}}g" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product06.png')}}" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product08.png')}}" alt="">
-						</div>
+						@endforeach
 					</div>
 				</div>
 				<!-- /Product main img -->
 
 				<!-- Product thumb imgs -->
 				<div class="col-md-2  col-md-pull-5">
+					<br><br><br>
 					<div id="product-imgs">
+												
+						{{-- {{dd($product->product_images)}} --}} 
+						 @foreach ($product->product_images as $image)
 						<div class="product-preview">
-							<img src="{{asset('./access/img/product01.png')}}" alt="">
+							<img src="{{asset($image->product_image)}}" alt="">
 						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product03.png')}}" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product06.png')}}" alt="">
-						</div>
-
-						<div class="product-preview">
-							<img src="{{asset('./access/img/product08.png')}}" alt="">
-						</div>
+						@endforeach
 					</div>
 				</div>
 				<!-- /Product thumb imgs -->
@@ -75,8 +63,10 @@
 				<!-- Product details -->
 				<div class="col-md-5">
 					<div class="product-details">
-
 						<h2 class="product-name">{{$product->name}}</h2>
+						<p class="product-category text-white">{{$product->category->name}}</> 
+						<p class="product-brand text-white" >{{$product->product_brand->name}}</p>
+
 						<div>
 							<div class="product-rating">
 								<i class="fa fa-star"></i>
@@ -85,75 +75,77 @@
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star-o"></i>
 							</div>
-							<a class="review-link" href="#">10 Review(s) | Add your review</a>
+							<a class="review-link text-white" href="#">10 Review(s) | Add your review</a>
 						</div>
 						<div>
 							@php
 							$discounted_price = $product->price - $product->discounted_percentage / 100 * $product->price;
 							@endphp
 							<h3 class="product-price">{{$discounted_price}} <del class="product-old-price">{{$product->price}}</del></h3>
-							<span class="product-available">1 - In Stock </span>
-							<!-- <span class="product-available">{{$product->where('id','LIKE','$product->id')->count()+1}} 10 In Stock</span> -->
+							<span class="product-available"> In Stock </span>
+							<!-- <span class="product-available"> 10 In Stock</span> -->
 
-							<p>{{$product->description}}</p>
+							<p class="product-description text-white text-justify">{{$product->description}}</p> <br>
 
-							<div class="product-options">
-								<!-- <label>
-									Size
-									<select class="input-select">
-										<option value="0">X</option>
-									</select>
-								</label> -->
+							<table class=" table table-hover tm-product-table tm-table-small ">
+								<tr class="font-bold">
+									<td class=" "><span>PROCESSOR</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->processor}}</td>
+									<td><span class="text-white">SCREEN-SIZE</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->screen_size}}</td>
+								</tr>
+						
+								<tr class="font-bold">
+									<td><span class="text-white">RAM</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->ram}}</td>
+											<td class=" "><span>DISPLAY</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->display}}</td>
+								</tr>
+				
+								<tr class="font-bold">
+									<td class=" "><span>STORAGE</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->storage}}</td>
+									<td><span class="text-white">GRAPHICS</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->graphics}}</td>
+								</tr>
+				
+							</table>
+							<div class="product-options ">
 								<label>
-									Color
+									<span class="text-white">Color</span>
 									<select class="input-select">
-										<option value="0">Red</option>
-										<option value="0">Black</option>
+										@foreach ($product->load('product_colors')->product_colors as $color)
+										<option value="{{$color->id}}">{{$color->color_name}}</option>
+										@endforeach
 									</select>
 								</label>
 							</div>
 
 							<!-- Add to Cart -->
-							<div class="add-to-cart flex flex-nowrap">
-								<div class="qty-label">
-									Qty
-									<div class="input-number">
-										<input type="number">
-										<span class="qty-up">+</span>
-										<span class="qty-down">-</span>
-									</div>
-								</div>
+							<div class="add-to-cart flex flex-nowrap space-x-4">
 
 								<form
 									action="/add-to-cart/{{$product->id}}"
 									method="POST">
 									@csrf
 									<button type="submit" class="add-to-cart-btn ml-20px"><i class="fa fa-shopping-cart"></i> add to cart</button>
+								
+								</form>						
+	
+									<form action="/add-to-wishlist/{{$product->id}}" method="POST">
+										@csrf
+											<button 
+											type="submit" 
+											class="add-to-cart-btn ml-20px">
+										<i class="fa fa-heart-o"></i>
+										<span class="tooltipp">add to wishlist</span>
+									</button>        
 								</form>
+			
 							</div>
 							<!-- Add to Cart -->
 
-							<ul class="product-btns">							
-
-								<form action="/add-to-wishlist/{{$product->id}}" method="POST">
-        							@csrf
-       								 <button 
-                						type="submit" 
-                						class="add-to-wishlist">
-            						<i class="fa fa-heart-o"></i>
-            						<span class="tooltipp">add to wishlist</span>
-        						</button>        
-    						</form>
-								{{-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> --}}
-							</ul>
-
-							<ul class="product-links">
-								<li>Category:</li>
-								<li><a href="#">Headphones</a></li>
-								<li><a href="#">Accessories</a></li>
-							</ul>
-
-							<ul class="product-links">
+							<ul class="product-links text-white">
 								<li>Share:</li>
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -182,7 +174,7 @@
 							<div id="tab1" class="tab-pane fade in active">
 								<div class="row">
 									<div class="col-md-12">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+										<p class="text-white">{{$product->description}}</p>
 									</div>
 								</div>
 							</div>
@@ -192,7 +184,41 @@
 							<div id="tab2" class="tab-pane fade in">
 								<div class="row">
 									<div class="col-md-12">
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<table class=" table table-hover tm-product-table tm-table-small ">
+								<tr class="font-bold">
+									<td class=" "><span>PROCESSOR</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->processor}}</td>
+									<td><span class="text-white">SCREEN-SIZE</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->screen_size}}</td>
+								</tr>
+						
+								<tr class="font-bold">
+									<td class=" "><span>BATTERY</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->battery}}</td>
+									<td><span class="text-white">RAM</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->ram}}</td>
+								</tr>
+				
+								<tr class="font-bold">
+									<td class=" "><span>STORAGE</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->storage}}</td>
+									<td><span class="text-white">GRAPHICS</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->graphics}}</td>
+								</tr>
+					
+								<tr class="font-bold">
+									<td class=" "><span>DISPLAY</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->display}}</td>
+									<td><span class="text-white">OPREATION_SYSTEM</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->opreation_system}}</td>
+								</tr>
+								<tr class="font-bold">
+									<td class=" "><span>PORT & CONNECTION</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->ports_and_connections}}</td>
+									<td><span class="text-white">WARRANTY</span></td>
+									<td class=" font-bold p-2  h-10 border   "> - {{$product->warranty}}</td>
+								</tr>
+							</table>
 									</div>
 								</div>
 							</div>
@@ -399,121 +425,50 @@
 					</div>
 
 					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('./access/img/product01.png')}}" alt="">
-								<div class="product-label">
-									<span class="sale">-30%</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+					
+					@php
+						$related_products = $product->category->products()->limit(4)->get();
+					@endphp
 
-					<!-- product -->
+					@foreach ($related_products as $product)
 					<div class="col-md-3 col-xs-6">
+					
 						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('./access/img/product02.png')}}" alt="">
-								<div class="product-label">
-									<span class="new">NEW</span>
-								</div>
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+                        <a href="/product-details/{{ $product->id }}">
+                            <div class="product-img">
+                                <img src="{{asset($product->product_images->first()->product_image)}}" alt="">
+                                <div class="product-label">
+                                    @if ($product->discounted_percentage > 0)
+                                    <span class="sale">{{$product->discounted_percentage}} %</span>
+                                    @endif
+                                    @php
+                                    $new_arrival=$product->new_arrival;
+                                    @endphp
+                                    @if($new_arrival == 1)
+                                    <span class="new"> New </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="product-body">
+                                <p class="product-category">{{ $product->category->name }}</p>
+                                <h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
 
-					<div class="clearfix visible-sm visible-xs"></div>
+                                @php
+                                $discounted_price = $product->price - $product->discounted_percentage / 100 * $product->price;
+                                @endphp
 
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('./access/img/product03.png')}}" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-o"></i>
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
-					</div>
-					<!-- /product -->
+                                <h4 class="product-price">{{$discounted_price}}
+                                    @if ($product->discounted_percentage > 0)
+                                    <del class="product-old-price">{{$product->price}}</del>
+                                    @endif
+                                </h4>
+                                <x-productIcon :product="$product"></x-productIcon>
 
-					<!-- product -->
-					<div class="col-md-3 col-xs-6">
-						<div class="product">
-							<div class="product-img">
-								<img src="{{asset('./access/img/product04.png')}}" alt="">
-							</div>
-							<div class="product-body">
-								<p class="product-category">Category</p>
-								<h3 class="product-name"><a href="#">product name goes here</a></h3>
-								<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-								<div class="product-rating">
-								</div>
-								<div class="product-btns">
-									<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
-									<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
-									<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
-								</div>
-							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-							</div>
-						</div>
+                            </div>
+                        </a>
+                    	</div>
 					</div>
+					@endforeach
 					<!-- /product -->
 
 				</div>
@@ -522,4 +477,5 @@
 			<!-- /container -->
 		</div>
 		<!-- /Section related porducts -->
+	</div>
 </x-layout>

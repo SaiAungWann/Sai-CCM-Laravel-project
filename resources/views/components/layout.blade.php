@@ -176,7 +176,7 @@
 										<li>
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="{{ asset($cart_item->product->image)}}" alt="">
+													<img src="{{ asset($cart_item->product->load('product_images')->product_images->first()->product_image)}}" alt="">
 												</div>
 												
 												<div class="product-body">

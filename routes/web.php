@@ -15,6 +15,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\EmailConrtoller;
+use App\Http\Controllers\UserAddressController;
 use App\Http\Middleware\MustBeLoginUser;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
@@ -91,6 +92,12 @@ Route::get('/locale/{locale}', function ($locale) {
     session()->put('locale', $locale);
     return back();
 });
+
+Route::get('/user/address/create/', [UserAddressController::class, "create"])->middleware(MustBeLoginUser::class);
+Route::put('/user/address/update/{state_or_region}', [UserAddressController::class, "update"])->middleware(MustBeLoginUser::class);
+Route::post('/user/address/store', [UserAddressController::class, "store"])->middleware(MustBeLoginUser::class);
+Route::get('/user/address/store/{state_or_region}/townships', [UserAddressController::class, "getTownships"])->middleware(MustBeLoginUser::class);
+Route::get('/user/address/store/{township}/zipcode', [UserAddressController::class, "gtZipCode"])->middleware(MustBeLoginUser::class);
 
 
 // Email ......

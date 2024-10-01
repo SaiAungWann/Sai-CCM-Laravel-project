@@ -31,7 +31,7 @@ class LoginController extends Controller
         ])) {
             return redirect('/');
         } else {
-            return back()->withErrors(['email' => 'wrong credentials']);
+            return back()->withErrors(['email' => 'Email or Password is incorrect']);
         }
     }
 }

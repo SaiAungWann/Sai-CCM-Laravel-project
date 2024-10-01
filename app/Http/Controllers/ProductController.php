@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductBrand;
+use App\Models\ProductColor;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 
@@ -30,8 +31,10 @@ class ProductController extends Controller
     }
     public function show(Product $product)
     {
+        $product_colors = $product->load("product_colors")->product_colors;
         return view('product-details', [
-            'product' => $product
+            'product' => $product->load("category", 'product_brand', 'product_images'),
+            'product_colors' => $product_colors
         ]);
     }
     public function checkout()

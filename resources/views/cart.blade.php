@@ -41,10 +41,6 @@
                   @if ($cartItems?->count())
 
                   @foreach ($cartItems->load('product') as $cartItem)
-
-                  @php
-                      // dd($cartItem->product->name);
-                  @endphp
                   <tr class="w-full text-center border-b-2 space-y-6 h-10">
                         <td class="text-left">{{$cartItem->product->name}}</td>
                           <td class="text-center text-black font-bold w-24">

@@ -19,7 +19,7 @@ class ProductBrandFactory extends Factory
     {
         // $category = Category::all();
         return [
-            'name' => fake()->word(),
+            'name' => fake()->randomElement(['Dell', 'HP', 'Apple', 'Asus', 'Lenovo', 'Acer']),
             'image' => fake()->imageUrl(640, 480),
             'website' => fake()->url(),
             'slug' => fake()->slug(),

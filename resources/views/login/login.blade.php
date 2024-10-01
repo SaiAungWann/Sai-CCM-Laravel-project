@@ -1,7 +1,6 @@
+
+
 <link rel="stylesheet" href="{{asset('access/css/loginAndRegister.css')}}">
-
-
-
 <div class="container" id="container">
 
     <div class="form-container sign-in-container">
@@ -73,17 +72,22 @@
             <div class="overlay-panel  overlay-left ">
                 <h1>Welcome Back!</h1>
                 <p>To keep connected with us please login with your personal info</p>
-                <!-- <a href="/login"><button class="ghost" id="signIn">Sign In</button></a> -->
                 <button class="ghost" id="signIn">Sign In</button>
+                 <a href="/"><button class="ghost" id="signIn">Home Page</button></a>
             </div>
-            <div class="overlay-panel overlay-right">
-                <h1>Hello, Friend!</h1>
-                <p>Enter your personal details and start journey with us</p>
-                <button class="ghost" id="signUp">Sign Up</button>
-                <!-- <a href="/register"> <button class="ghost" id="signUp">Sign Up</button></a> -->
-            </div>
+        
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start journey with us</p>
+                    <button herf="/register" class="ghost" id="signUp">Sign Up</button>
+                    <br>
+                    {{-- <p>Not Now!!</p> --}}
+                     <a href="/"> <button class="ghost" id="signUp">Home Page</button></a>
+                </div>
+            
         </div>
     </div>
 </div>
 
 <script src="{{asset('access/js/loginAndRegister.js')}}"></script>
+    

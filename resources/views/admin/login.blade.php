@@ -23,7 +23,7 @@
                                 required
                                 />
                             </div>
-                        <form action="index.html" method="post" class="tm-login-form">
+                        <form action="" method="post" class="tm-login-form">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input

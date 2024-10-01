@@ -14,20 +14,21 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('product_brand_id')->nullable();
+            $table->unsignedBigInteger('product_brand_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->integer('price');
             $table->integer('discounted_percentage');
-            $table->string('image')->nullable();
             $table->string('slug')->uniqid();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->boolean("new_arrival")->nullable();
             $table->boolean("top_seller")->nullable();
-            $table->string('memory')->nullable();
+            $table->string("processor")->nullable();
+            $table->string("screen_size")->nullable();
+            $table->string("battery")->nullable();
+            $table->string("ram")->nullable();
             $table->string('storage')->nullable();
             $table->string('graphics')->nullable();
             $table->string('display')->nullable();
-            $table->string('battery')->nullable();
             $table->string('opreation_system')->nullable();
             $table->string('ports_and_connections')->nullable();
             $table->string('warranty')->nullable();

@@ -54,4 +54,16 @@ class Product extends Model
             });
         });
     }
+
+    // a product belongToMany productColor
+    public function product_colors()
+    {
+        return $this->belongsToMany(ProductColor::class, "product_color_product", "product_id", "product_color_id");
+    }
+
+    // a product has many productImages
+    public function product_images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
