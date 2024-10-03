@@ -14,16 +14,18 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $category = Category::all()->load("products");
+        $category = Category::with('products')->get();
+        // \dd($category);
+        // $category = Category::all()->load("products");
         $topSellingProductsOne = $category->find(1)->products()->where('top_seller', true)->take(3)->get();
         $topSellingProductsTwo = $category->find(2)->products()->where('top_seller', true)->take(3)->get();
         $topSellingProductsThree = $category->find(3)->products()->where('top_seller', true)->take(3)->get();
         return view('home', [
-            "products" => Product::orderBy("id", "desc")->get()->load("category"),
-            "newArrivalProducts" => Product::all()->where("new_arrival", "LIKE", true)->load("category"),
+            "products" => Product::orderBy("id", "desc")->get()->load("category", "product_brand", "product_images"),
+            "newArrivalProducts" => Product::all()->where("new_arrival", "LIKE", true)->load("category", "product_brand", "product_images"),
             "categories" => $category,
             'productBrands' => ProductBrand::all(),
-            'topSellingProducts' => Product::where('top_seller', true)->get()->load('category'),
+            'topSellingProducts' => Product::where('top_seller', true)->get()->load('category', "product_brand", "product_images"),
             'topSellingProductsOne' => $topSellingProductsOne,
             'topSellingProductsTwo' => $topSellingProductsTwo,
             'topSellingProductsThree' => $topSellingProductsThree,

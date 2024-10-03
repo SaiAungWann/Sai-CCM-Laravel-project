@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create('otps', function (Blueprint $table) {
             $table->id();
-            $table->string('address_name')->unique();
-            $table->boolean('is_default')->default(true);
-            $table->string('user_id');
-            $table->string('state_or_region_township_zip');
-            $table->string('address');
-            $table->string('telephone');
+            $table->unsignedBigInteger('user_id');
+            $table->string('otp')->nullable();
+            $table->timestamp('expires_at')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_addresses');
+        Schema::dropIfExists('otps');
     }
 };

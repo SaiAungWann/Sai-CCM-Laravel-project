@@ -164,7 +164,7 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-3">
 						<div>
 							<!-- product widget -->
-							@foreach ($topSellingProductsOne as $product)
+							@foreach ($topSellingProductsOne->load('product_images') as $product)
 							<div class="product-widget">
 								<div class="product-img">
 									<img src="{{asset($product->image)}}" alt="">

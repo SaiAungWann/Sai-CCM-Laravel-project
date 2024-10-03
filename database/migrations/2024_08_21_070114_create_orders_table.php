@@ -17,7 +17,8 @@ return new class extends Migration
             $table->enum('status', ['pending', 'shipping', 'delivered', 'declined'])
                 ->default('pending');
             $table->float("total_amount");
-            $table->string("shipping_address")->nullable(true);
+            $table->string("shipping_address");
+            $table->unsignedBigInteger("phone_number");
             $table->timestamps();
         });
     }

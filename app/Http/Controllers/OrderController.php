@@ -28,7 +28,9 @@ class OrderController extends Controller
             'price' => 'required',
             'total_amount' => 'required',
             'quantity' => 'required',
-            // 'shipping_address' => 'required',
+            'shipping_address' => 'required',
+            'telephone' => 'required',
+            'my_address_is_correct' => 'accepted',
         ]);
         $products = collect([]);
         auth()->user()?->cart?->cart_items->load('product')
@@ -46,6 +48,7 @@ class OrderController extends Controller
         $order->user_id = auth()->id();
         $order->total_amount = request('total_amount');
         $order->shipping_address  = request('shipping_address');
+        $order->phone_number = request('telephone');
         $order->save();
 
         //create order items

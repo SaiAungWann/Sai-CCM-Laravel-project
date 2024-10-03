@@ -15,8 +15,10 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishListController;
 use App\Http\Controllers\EmailConrtoller;
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\UserAddressController;
 use App\Http\Middleware\MustBeLoginUser;
+use App\Models\Otp;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -71,7 +73,8 @@ Route::post('/register', [RegisterController::class, "store"]);
 
 Route::post('/logout', [LogOutController::class, 'destory']);
 
-Route::get('/user/{user_full_name}/profile', [UserController::class, "show"]);
+Route::get('/user/{user}/profile', [UserController::class, "show"])->middleware(MustBeLoginUser::class);
+Route::get('/user/{user}/profile/order', [UserController::class, "showOrders"])->middleware(MustBeLoginUser::class);
 
 Route::get('/checkout', [CheckoutController::class, "index"])->middleware(MustBeLoginUser::class);
 Route::get('/cart', [CartController::class, "index"])->middleware(MustBeLoginUser::class);
@@ -94,8 +97,10 @@ Route::get('/locale/{locale}', function ($locale) {
 });
 
 Route::get('/user/address/create/', [UserAddressController::class, "create"])->middleware(MustBeLoginUser::class);
-Route::put('/user/address/update/{state_or_region}', [UserAddressController::class, "update"])->middleware(MustBeLoginUser::class);
+Route::get('/user/address/{user_address}/edit', [UserAddressController::class, "edit"])->middleware(MustBeLoginUser::class);
+Route::put('/user/address/{user_address}/update', [UserAddressController::class, "update"])->middleware(MustBeLoginUser::class);
 Route::post('/user/address/store', [UserAddressController::class, "store"])->middleware(MustBeLoginUser::class);
+Route::get('/user/address/store/{user_addresses}/address_name', [UserAddressController::class, "getAddressName"])->middleware(MustBeLoginUser::class);
 Route::get('/user/address/store/{state_or_region}/townships', [UserAddressController::class, "getTownships"])->middleware(MustBeLoginUser::class);
 Route::get('/user/address/store/{township}/zipcode', [UserAddressController::class, "gtZipCode"])->middleware(MustBeLoginUser::class);
 
@@ -108,3 +113,9 @@ Route::get('/about-us', [EmailConrtoller::class, 'about_us'])->name('about-us');
 Route::get('/privacy-and-policy', [EmailConrtoller::class, 'privacy_and_policy']);
 Route::get('/terms-and-conditions', [EmailConrtoller::class, 'terms_and_conditions']);
 Route::get('/orders-and-return', [EmailConrtoller::class, 'order_and_return']);
+
+// verifine email
+Route::get('/sent-email/otp', [OtpController::class, 'sendOtp'])->middleware('auth');
+Route::get('/sent-email/otp/view', [OtpController::class, 'viewOtp'])->middleware('auth');
+Route::post('/sent-email/verify', [OtpController::class, 'verifyOtp'])->middleware('auth');
+Route::get('/sent-email/otp/confirm', [OtpController::class, 'confirmOtp'])->middleware('auth');

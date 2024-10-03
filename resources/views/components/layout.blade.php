@@ -45,6 +45,20 @@
 
 </head>
 
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/66fe363d37379df10df1198b/1i98g7ofh';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
 <body class="body">
 
 	<!-- HEADER -->
@@ -63,7 +77,7 @@
 					<li><a href="/locale/en"><i class="font-blod"></i> EN</a></li>
 
 					@auth
-					<li><a href="/user/{{auth()->user()->full_name}}/profile"><i class="fa fa-user-o"></i> {{auth()->user()->full_name}}</a></li>
+					<li><a href="/user/{{auth()->user()->id}}/profile"><i class="fa fa-user-o"></i> {{auth()->user()->full_name}}</a></li>
 					<li>
 						<form
 							action="/logout"

@@ -13,8 +13,9 @@
 
             <div class="order-details">
                 <p><strong>Order ID:</strong> {{ $order->id }}</p>
+                <p><strong>Order Status:</strong> {{ $order->status }}</p>
                 <p><strong>Total Amount:</strong> ${{ number_format($order->total_amount) }}</p>
-                {{-- <p><strong>Shipping Address:</strong> {{ $order->shipping_address }}</p> --}}
+                <p><strong>Shipping Address:</strong> {{ $order->shipping_address }}</p>
                 
                 <table class="table">
                   <tr class="rowOne">

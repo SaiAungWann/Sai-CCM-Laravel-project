@@ -20,10 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (env('APP_ENV') === 'local') {
-            Model::preventLazyLoading();
-        };
+        // if (env('APP_ENV') === 'local') {
+        //     Model::preventLazyLoading();
+        // };
 
+        Model::unguard();
+        Model::preventLazyLoading(false);
         // Model::preventLazyLoading(env('APP_ENV') === 'local');
     }
 }
