@@ -109,7 +109,7 @@ s0.parentNode.insertBefore(s1,s0);
 					<div class="col-md-3">
 						<div class="header-logo flex items-center">
 							<a href="/" class="logo">
-								{{-- <img src="{{ asset('./access/img/logo.png')}}" alt=""> --}}
+							
 								<p class="font-bold text-white text-3xl text-center mt-4">SAI <span class="text-red-500">LARAVEL</span></p>
 							</a>
 						</div>
@@ -117,7 +117,7 @@ s0.parentNode.insertBefore(s1,s0);
 					<!-- /LOGO -->
 
 					<!-- SEARCH BAR -->
-					<div class="col-md-6">
+					<div class="col-md-5">
 						<div class="header-search">
 							<form action="/store/search">
 								<select class="input-select" name="category">
@@ -146,10 +146,20 @@ s0.parentNode.insertBefore(s1,s0);
 					<!-- /SEARCH BAR -->
 
 					<!-- ACCOUNT -->
-					<div class="col-md-3 clearfix">
+					<div class="col-md-4 clearfix">
 						<div class="header-ctn">
+							@auth
+							<div class ="flex items-center" >
+								<a href="{{url('/user/'.auth()->user()->id.'/profile')}}" ">
+									<img src="{{auth()->user()->profile_picture}}" class="w-10 h-10 rounded-full border-white border-solid border-2" >
+								</a>
+								{{-- <p>{{auth()->user()->full_name}}</p> --}}
+
+							</div>
+							@endauth
 							<!-- Wishlist -->
 							@auth
+					
 							<div>
 								<a href="/wishlist">
 									<i class="fa fa-heart-o"></i>

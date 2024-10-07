@@ -23,19 +23,33 @@
                                 <p class="font-bold text-white"> Your Address</p>
                                 <table>
                                     <tr class=" h-10 font-bold border-collapse border-b-2 border-white space-y-4">
+                                        <td>No. </td>
                                         <td>Address Name </td>
                                         <td>Phone Number</td>
                                         <td>state/region Township ZipCode</td>
                                         <td>Address</td>
-                                        <td>Action</td>
+                                        <td class="text-center">Action</td>
                                     </tr>
                                     @foreach ($user_addresses as $user_address)
                                     <tr class=" h-10 border-collapse border-b-2 border-white space-y-4">
+                                        <td>{{$user_address->id}}</td>
                                         <td>{{$user_address->address_name}}</td>
                                         <td>{{$user_address->telephone}}</td>
                                         <td>{{$user_address->state_or_region_township_zip}}</td>
                                         <td>{{$user_address->address}}</td>
-                                        <td><button> <a href="/user/address/{{$user_address->id}}/edit" class="text-white border border-white rounded p-1 bg-yellow-500">Edit</a> </button></td>
+                                        <td class=" mb-4 flex flex-row justify-center align-middle">
+                                            <form action="/user/address/{{$user_address->id}}/edit" class="m-auto mb-2" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <button class="text-white border border-white rounded p-1 bg-yellow-500 pr-2 pl-2">Edit</button >  
+                                            </form>
+                                            <form action="/user/address/{{$user_address->id}}/delete" class="mb-2 ml-2" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-white border border-white rounded p-1 bg-red-500">Delete</button >  
+                                            </form>
+                                          
+                                        </td>
                                     </tr>
                                         
                                     @endforeach

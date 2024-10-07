@@ -44,24 +44,6 @@ class DatabaseSeeder extends Seeder
             )
             ->create();
 
-        ProductColor::factory(3)
-            ->has(Product::factory()->count(3)
-                ->has(ProductImage::factory()->count(4), "product_images")
-                ->has(ProductBrand::factory()->count(1), "product_brand"), "products")
-            ->create();
-
-        User::factory(3)
-            // ->has(UserAddress::factory()->count(1), "user_addresses")
-            ->has(Cart::factory()
-                ->has(CartItem::factory()->count(5), "cart_items")
-                ->count(1))
-            // ->has(Order::factory()
-            // ->has(OrderItem::factory()->count(5), "orderItems")
-            // ->count(3), "orders")
-            ->has(WishList::factory()
-                ->has(WishListItem::factory()->count(5), "wish_list_items")
-                ->count(1), "wish_list")
-            ->create();
 
         // the code below is the same as the code ->has(CartItem::factory()->count(5))->count(1), "cart_items")
         // $carts = Cart::all(); //3
@@ -435,5 +417,18 @@ class DatabaseSeeder extends Seeder
                 );
             }
         }
+
+        User::factory(5)
+            // ->has(UserAddress::factory()->count(1), "user_addresses")
+            ->has(Cart::factory()
+                ->has(CartItem::factory()->count(5), "cart_items")
+                ->count(1))
+            // ->has(Order::factory()
+            //     // ->has(OrderItem::factory()->count(5), "orderItems")
+            //     ->count(3), "orders")
+            ->has(WishList::factory()
+                ->has(WishListItem::factory()->count(5), "wish_list_items")
+                ->count(1), "wish_list")
+            ->create();
     }
 }

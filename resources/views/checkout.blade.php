@@ -75,7 +75,7 @@
             <div class="form-group">
               <select name="shipping_address" id="shipping_address" class="input h-20">
 
-                <option value="select"> Select an address</option>
+                <option value=""> Select an address</option>
                 @foreach ($user_addresses as $user_address)
                 <option value="{{ $user_address->address_name . ' - ' .
                    $user_address->state_or_region_township_zip . ' - ' .
@@ -88,7 +88,7 @@
               </select>
                 @error('address_name')
                 <p class="text-red-400 my-4">{{ $message }}</p>
-            @enderror
+              @enderror
             </div>
             <div class="form-group text-black">
                 <select name="telephone" id="telephone" class="input">
@@ -100,6 +100,13 @@
                 <p class="text-red-400 my-4">{{ $message }}</p>
             @enderror
             </div>
+            @if (auth()->user()->user_addresses->count() == 0)
+            <div class="form-group text-black">
+              <h3>I Don't Have An Address</h3> <br>
+                <a href="/user/address/create/" class="btn btn-primary btn-block">Add New Address</a>
+            </div>
+                
+            @endif
             
           <!-- /shipping Details -->
 

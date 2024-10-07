@@ -1,23 +1,6 @@
 <x-adminLayout>
-      {{-- <div class="container mt-5 col-12"> --}}
-        {{-- <div class="row tm-content-row">
-          <div class="col-12 tm-block-col">
-            <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-              <h2 class="tm-block-title">List of Accounts</h2>
-              <p class="text-white">Accounts</p>
-              <select class="custom-select">
-                <option value="0">Select account</option>
-                <option value="1">Admin</option>
-                <option value="2">Editor</option>
-                <option value="3">Merchant</option>
-                <option value="4">Customer</option>
-              </select>
-            </div>
-          </div>
-        </div> --}}
-   
-        <!-- row -->
-      {{-- <div class="flex items-top justify-between flex-row">
+    <div class="container mt-5 col-12">
+        <div class="flex items-top justify-between flex-row">
         <div class="row tm-content-row">
           <div class="tm-block-col tm-col-avatar">
             <div class="tm-bg-primary-dark tm-block tm-block-avatar">
@@ -116,24 +99,21 @@
                     name="email"
                     type="email"
                     class="form-control validate"
-                    value="{{auth()->check() ? auth()->user()->email : '' ,old('email') }}"
+                    value="{{$user->email, old('email') }}"
+                    disabled
                   />
                   @error('email')
                   <p>{{$message}}</p>
                   @enderror
                 </div>
                 <div class="form-group col-lg-6">
-                  <label for="email">Account Role</label>
-                  <select
-                    id="role"
-                    name="role"
-                    class="form-control validate h-auto"
-                        >
-                        <option value="admin" {{auth()->user()->role == 'admin' ? 'selected' : ''}}>Admin</option>
-                        <option value="user" {{auth()->user()->role == 'user' ? 'selected' : ''}}>User</option>
-                      </select>
+                  <label for="role">Account Role</label>
+                  <select name="role" id="role" class="form-control validate h-auto">
+                    <option value="{{$user->role}}" {{$user->role == 'admin' ? 'selected' : ''}}>Admin</option>
+                    <option value="{{$user->role}}" {{$user->role == 'user' ? 'selected' : ''}}>User</option>
+                  </select>
               
-                  @error('email')
+                  @error('role')
                   <p>{{$message}}</p>
                   @enderror
                 </div>
@@ -207,7 +187,7 @@
 
                   <button
                   type="submit"
-                  class=" w-full btn border btn-danger rounded-xl btn-block text-uppercase text-white font-bold"
+                  class=" w-full btn border rounded-xl btn-danger btn-block text-uppercase text-white font-bold"
                   >
                   Delete Your Account
                 </button>
@@ -216,50 +196,7 @@
               </div>
             </div>
           </div>
-        </div>
-      </div> --}}
-
-          <div class="col-12 tm-block-col">
-                    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
-                        <h2 class="tm-block-title">Orders List</h2>
-                        @if ($users?->count())
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">ORDER ID</th>
-                                    <th scope="col">FIRST NAME</th>
-                                    <th scope="col">MIDDLE NAME</th>
-                                    <th scope="col">LAST NAME</th>
-                                    <th scope="col">EMAIL</th>
-                                    <th scope="col">ROLE</th>
-                                    <th scope="col">PROFILE PICTURE</th>
-                                    <th scope="col">PHONE NO.</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($users as $user)
-                                @if ($user->role == 'admin')
-                                    
-                                <tr onclick="window.location='/admin/account/{{$user->id}}/profile'">
-                                    <th scope="row"><b>{{$user->id}}</b></th>
-                                    <td  class="text-center flex items-center justify-items-center flex-row">
-                                        {{$user->first_name}}
-                                    </td>
-                                    <td>{{$user->middle_name}}</td>
-                                    <td>{{$user->last_name}}</td>
-                                    <td>{{$user->email}}</td>
-                                    <td class="text-center">{{$user->role}}</td>
-                                    <td><img src="{{asset($user->profile_picture)}}" width="40" class="img-fluid" alt=""></td>
-                                    <td>{{$user->user_addresses?->first()?->phone_number}}</td>
-                                </tr>                                   
-                                @endif
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @else
-                        <p><strong>No User For Today!</strong></p>
-                        @endif
-                    </div>
+    </div>
     </div>
 
 </x-adminLayout>

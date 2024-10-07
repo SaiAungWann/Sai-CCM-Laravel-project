@@ -1147,6 +1147,8 @@ textarea.input {
 
 .product-widget {
     position: relative;
+    border: 1px solid #eee;
+    margin: 10px;
 }
 
 .product-widget + .product-widget {
@@ -2096,7 +2098,7 @@ textarea.input {
 }
 
 .wishlist-table {
-    width: 70%;
+    width: 100%;
     margin: auto;
     padding-left: 200px;
     padding-right: 200px;
@@ -2352,4 +2354,30 @@ input[type="number"] {
 .input-wrapper button:last-child {
     /* border-radius: 0 50% 50% 0; */
     color: red;
+}
+.table {
+    background-color: #50697f;
+    color: #fff;
+    font-size: 85%;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+.table td {
+    vertical-align: middle;
+}
+.pending {
+    background-color: #9be64d;
+    box-shadow: 0 0 8px #9be64d, inset 0 0 8px #edfd04;
+}
+.processing {
+    background-color: #efc54b;
+    box-shadow: 0 0 8px #efc54b, inset 0 0 8px #0019fa;
+}
+.delivered {
+    background-color: #efc54b;
+    box-shadow: 0 0 8px #efc54b, inset 0 0 8px #03ee17;
+}
+.declined {
+    background-color: #da534f;
+    box-shadow: 0 0 8px #da534f, inset 0 0 8px #da534f;
 }

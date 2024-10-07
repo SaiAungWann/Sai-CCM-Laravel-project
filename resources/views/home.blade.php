@@ -167,7 +167,7 @@
 							@foreach ($topSellingProductsOne->load('product_images') as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(1)->name }}</p>
@@ -193,7 +193,7 @@
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(2)->name }}</p>
@@ -230,7 +230,7 @@
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(3)->name }}</p>
@@ -256,7 +256,7 @@
 							@foreach ($topSellingProductsTwo as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(2)->name }}</p>
@@ -297,7 +297,7 @@
 							@foreach ($topSellingProductsThree as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(3)->name }}</p>
@@ -323,7 +323,7 @@
 							@foreach ($topSellingProductsOne as $product)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="{{asset($product->image)}}" alt="">
+									<img src="{{asset($product->product_images->first()->product_image)}}" alt="">
 								</div>
 								<div class="product-body">
 									<p class="product-category">{{ $category->find(1)->name }}</p>

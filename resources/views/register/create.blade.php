@@ -22,7 +22,7 @@
             <p class="error">{{ $message }}</p>
             @enderror
 
-            <a href="#">Forgot your password?</a>
+            <a href="/user/profile/forgotPassword">Forgot your password?</a>
             <button type="submit">Sign In</button>
         </form>
     </div>

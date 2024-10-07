@@ -104,6 +104,16 @@ button:focus {
     flex-direction: column;
     font-size: 90%;
 }
+button a .logout {
+    color: red;
+    background-color: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 90%;
+}
 .nav-link > i {
     margin-bottom: 10px;
     margin-right: 0;
@@ -157,13 +167,15 @@ svg,
     border: 0;
 }
 .tm-content-row {
+    display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     margin-left: -20px;
     margin-right: -20px;
 }
 .tm-col {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     margin-bottom: 50px;
 }
 .tm-col-big {
@@ -215,6 +227,7 @@ thead {
 .table thead th {
     border-bottom: 0;
 }
+
 .tm-status-circle {
     display: inline-block;
     margin-right: 5px;
@@ -249,7 +262,15 @@ thead {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 30px;
 }
+.report .container {
+    max-width: 1200px;
+    display: block;
+}
+
 .tm-avatar-delete-link {
     position: absolute;
     left: 50%;
@@ -271,18 +292,23 @@ thead {
     display: block;
 }
 .tm-col-avatar {
-    max-width: 425px;
-    width: 37%;
+    max-width: 345px;
+    width: 100%;
     padding-left: 15px;
     padding-right: 15px;
 }
 .tm-col-account-settings {
     max-width: 822px;
-    width: 63%;
+    width: 100%;
     padding-left: 15px;
     padding-right: 15px;
 }
 .form-control {
+    background-color: #54657d;
+    color: #fff;
+    border: 0;
+}
+.form-control:disabled {
     background-color: #54657d;
     color: #fff;
     border: 0;
@@ -346,6 +372,16 @@ thead {
     color: #fff;
     background-color: #f5a623;
     border: 2px solid #f5a623;
+    font-size: 90%;
+    font-weight: 600;
+    width: 100%;
+    height: 45px;
+    border-radius: 50px;
+}
+.btn-danger {
+    color: #fff;
+    background-color: red;
+    border: 2px solid red;
     font-size: 90%;
     font-weight: 600;
     width: 100%;
@@ -454,7 +490,7 @@ input[type="checkbox"]:focus {
     min-height: 650px;
 }
 .tm-product-table-container {
-    max-height: 465px;
+    max-height: 400px;
     margin-bottom: 15px;
     overflow-y: scroll;
 }

@@ -1,8 +1,7 @@
 <x-layout>
-
-	<div class="w-full pl-32 pr-32 pt-5 text-white">
+    <x-userProfileLayout>
+<div class="w-full text-white">
              @php
-                $wishList = auth()->user()->wish_list;
                 $wishListItems = auth()->user()->wish_list?->wish_list_items()->simplePaginate(5);
                 $products = $wishListItems?->load('product')->pluck('product');
             @endphp
@@ -19,7 +18,7 @@
 {{-- {{dd($wishListItem->product->load('product_images')->product_images->first()->product_image)}} --}}
               <tr class="w-full text-center border-b-2  h-10">
                     <td class="text-left">{{$wishListItem->product->name}}</td>
-                     <td class="text-center w-44 m-auto"><img src="{{asset($wishListItem->product->load('product_images')->product_images->first()->product_image)}}" class="img-fluid w-44 m-auto"></td>
+                     <td class="text-center w-44 m-auto"><img src="{{asset($wishListItem->product->load('product_images')->product_images->first()->product_image)}}" class="img-fluid w-20 m-auto"></td>
                     <td class="text-right">$ {{$wishListItem->product->price}}</td>
 
                     <td class="text-red-500 text-right"><a href="/">
@@ -49,15 +48,7 @@
                     <td class="text-left">Total ({{$wishListItems->count()}})</td>
                     <td></td>
                     <td class="text-right">{{$wishListItems->sum('product.price')}}</td>
-                    <td class="text-red-500 text-right">
-                        <form action="/wishlist/{{$wishList->id}}/delete/all" method="POST">                     
-                            @csrf
-                            <button type="submit">
-                                <i class="fa fa-trash text-red-500"> Delete All</i>
-                            </button>
-                      </form>
-                        
-                    </td>
+                    <td class="text-red-500 text-right">Delete All</td>
                      <td><a href="/checkout">Add All to Cart <i class="fa fa-arrow-circle-right"></i></a></td>
                   </tr>
         </table>
@@ -69,4 +60,5 @@
         @endif
     </div>
 
+    </x-userProfileLayout>
 </x-layout>

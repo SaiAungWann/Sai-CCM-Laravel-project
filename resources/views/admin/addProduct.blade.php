@@ -1,13 +1,13 @@
 <x-adminLayout>
         <div class="container tm-mt-big tm-mb-big">
       <div class="row">
-        <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mx-auto">
           <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
             <div class="row">
               <div class="col-12">
                 <h2 class="tm-block-title d-inline-block">Add New Product</h2>
                  <form 
-                   action="/admin/product" 
+                   action="/admin/product/create" 
                    method="POST" 
                    enctype="multipart/form-data" 
                    class="tm-edit-product-form">
@@ -20,20 +20,64 @@
                  {{-- Product Image --}}
                 <div class="form-group mb-3">
                     <label for="">Product Image</label>
-                    <img  id="imagePreview" class="img-fluid" name="image">
+                    <img  id="imagePreview1" class="img-fluid" name="images[]" alt="product image 1">
                     <input
-                        id="fileInput"
-                        name="image"
+                        id="fileInput1"
+                        name="images[]"
                         type="file"
                         class="btn btn-primary btn-block mx-auto "
+                        value="{{old('image')}}"
                     >
                     @error('image')
                     <p class="text-red-400 my-4">{{$message}}</p>
                     @enderror
                 </div>
+                <div class="form-group mb-3">
+                    <label for="">Product Image</label>
+                    <img  id="imagePreview2" class="img-fluid" name="images[]" alt="product image 2">
+                    <input
+                        id="fileInput2"
+                        name="images[]"
+                        type="file"
+                        class="btn btn-primary btn-block mx-auto "
+                        value="{{old('image')}}"
+                    >
+                    @error('image')
+                    <p class="text-red-400 my-4">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label for="">Product Image</label>
+                    <img  id="imagePreview3" class="img-fluid" name="images[]" alt="product image 3">
+                    <input
+                        id="fileInput3"
+                        name="images[]"
+                        type="file"
+                        class="btn btn-primary btn-block mx-auto "
+                        value="{{old('image')}}"
+                    >
+                    @error('image')
+                    <p class="text-red-400 my-4">{{$message}}</p>
+                    @enderror
+                </div>
+                <div class="form-group mb-3">
+                    <label for="">Product Image</label>
+                    <img  id="imagePreview4" class="img-fluid" name="images[]" alt="product image 4">
+                    <input
+                        id="fileInput4"
+                        name="images[]"
+                        type="file"
+                        class="btn btn-primary btn-block mx-auto "
+                        value="{{old('image')}}"
+                    >
+                    @error('image')
+                    <p class="text-red-400 my-4">{{$message}}</p>
+                    @enderror
+                </div>
+              </div>
 
                 
-                     
+                                  <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">   
                   {{-- Product Name --}}
                     <div class="form-group mb-3">
                       <label
@@ -152,37 +196,8 @@
                     </div>
 
                     </div>
-
-
-
-
-
-                    {{-- Product Expire Date and Product Stock --}}
-                    <div class="row">
-                        <div class="form-group mb-3 col-xs-12 col-sm-6">
-                          {{-- Product Stock --}}
-                            <label
-                              for="stock"
-                              >Units In Stock
-                            </label>
-                            <input
-                              id="stock"
-                              name="stock"
-                              type="text"
-                              value="{{old('stock')}}"
-                              class="form-control validate"
-                            />
-                            @error('stock')
-                            <p class="error">{{ $message }}</p>
-                                
-                            @enderror
-                          </div>
-                      </div>
-                    
-                      
-                    </div>
   
-                <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
+
                                      {{-- Product Category --}}
                     <div class="form-group mb-3">
                       <label
@@ -205,8 +220,7 @@
                       </select>
                       @error('category_id')
                       <p class="error">{{ $message }}</p>
-                          
-                      @enderror
+                       @enderror
                     </div>
 
                    {{-- Product Brand --}}
@@ -232,23 +246,23 @@
                       @enderror
                     </div>
 
-                {{-- 
-                 and storage --}}
+
+                {{-- procssor and storage --}}
                 <div class="row">
                   {{-- Memory --}}
                     <div class="form-group mb-3 col-xs-12 col-sm-6">
                       <label
-                        for="memory"
-                        >Memory
+                        for="processor"
+                        >Processor
                       </label>
                       <input
-                        id="memory"
-                        name="memory"
+                        id="processor"
+                        name="processor"
                         type="text"
-                        value="{{old('memory')}}"
+                        value="{{old('processor')}}"
                         class="form-control validate"
                       />
-                      @error('memory')
+                      @error('processor')
                       <p class="error">{{ $message }}</p>
                           
                       @enderror
@@ -266,6 +280,45 @@
                         value="{{old('storage')}}"
                         class="form-control validate"
                       />@error('storage')
+                      <p class="error" >{{ $message }}</p>
+                          
+                      @enderror 
+                    </div>
+
+                </div>
+                {{-- ram and screen size --}}
+                <div class="row">
+                  {{-- Memory --}}
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="ram"
+                        >RAM
+                      </label>
+                      <input
+                        id="ram"
+                        name="ram"
+                        type="text"
+                        value="{{old('ram')}}"
+                        class="form-control validate"
+                      />
+                      @error('ram')
+                      <p class="error">{{ $message }}</p>
+                          
+                      @enderror
+                    </div>
+                  {{-- Storage --}}
+                    <div class="form-group mb-3 col-xs-12 col-sm-6">
+                      <label
+                        for="screen_size"
+                        >Screen Size
+                      </label>
+                      <input
+                        id="screen_size"
+                        name="screen_size"
+                        type="text"
+                        value="{{old('screen_size')}}"
+                        class="form-control validate"
+                      />@error('screen_size')
                       <p class="error" >{{ $message }}</p>
                           
                       @enderror 

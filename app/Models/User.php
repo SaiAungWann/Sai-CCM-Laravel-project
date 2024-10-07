@@ -92,4 +92,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Otp::class, 'user_id');
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
+    }
 }

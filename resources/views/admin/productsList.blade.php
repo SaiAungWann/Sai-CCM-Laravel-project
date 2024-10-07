@@ -5,6 +5,7 @@
           <div class="tm-bg-primary-dark tm-block tm-block-products">
             <div class="tm-product-table-container">
               <table class="table table-hover tm-table-small tm-product-table">
+                <h3>Product List</h3>
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
@@ -20,11 +21,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($products as $product)
+                  @foreach ($products->load('product_images') as $product)
                     <tr herf="/admin/product/{{$product->id}}/edit">
                       <td class="tm-product-name">{{$product->id}}</td>
                       <td class="tm-product-name">{{$product->name}}</td>
-                      <td><img src="{{asset($product->image)}}" width="40" class="img-fluid" /></td>
+                      <td><img src="{{asset($product->product_images->find($product->product_images->first()->id)->product_image)}}" width="40" class="img-fluid" /></td>
                       <td>$ {{$product->price}}</td>
                       <td>$ {{$product->discounted_percentage}}</td>
                       <td>1,450 Eg.</td>

@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductBrand;
 use App\Models\ProductColor;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
 
@@ -92,11 +93,13 @@ class ProductController extends Controller
             'price' => ['required'],
             'discounted_percentage' => ['required', 'numeric', 'between:0,100'],
             'slug' => 'required',
-            'image' => ['required', 'max:2048'],
+            'images.*' => ['required', 'max:2048'],
             'description' => 'required',
             'new_arrival' => 'required',
             'top_seller' => 'required',
-            'memory' => 'required',
+            'processor' => 'required',
+            'screen_size' => 'required',
+            'ram' => 'required',
             'storage' => 'required',
             'graphics' => 'required',
             'display' => 'required',
@@ -105,7 +108,8 @@ class ProductController extends Controller
             'ports_and_connections' => 'required',
             'warranty' => 'required',
         ]);
-        $image = request('image');
+        $images = request('images');
+        // \dd($images);
 
         $product = new Product();
 
@@ -114,12 +118,13 @@ class ProductController extends Controller
         $product->category_id = request('category_id');
         $product->price = request('price');
         $product->discounted_percentage = request('discounted_percentage');
-        $product->image = '/storage/' . $image->storeAs('products', $image->getClientOriginalName());
         $product->slug = request('slug');
         $product->description = request('description');
         $product->new_arrival = request('new_arrival');
         $product->top_seller = request('top_seller');
-        $product->memory = request('memory');
+        $product->processor = request('processor');
+        $product->screen_size = request('screen_size');
+        $product->ram = request('ram');
         $product->storage = request('storage');
         $product->graphics = request('graphics');
         $product->display = request('display');
@@ -129,9 +134,32 @@ class ProductController extends Controller
         $product->ports_and_connections = request('ports_and_connections');
         $product->save();
 
-        return redirect('admin/productList');
+        // $product_images = new ProductImage();
+        // \dd($images);
+        foreach ($images as $image) {
+            // \dd($image);
+            $product_images = new ProductImage();
+            $product_images->product_image = '/storage/' . $image->storeAs('products', time() .  "_" . $image->getClientOriginalName());
+
+            $product_images->product_id = $product->id;
+            $product_images->save();
+        }
+        $product_images->save();
+
+        // $product_images->product_image = '/storage/' . $image->storeAs('products', time() .  "_" . $image->getClientOriginalName());
+        // $product_images->product_id = $product->id;
+        // $product_images->save();
+        return redirect('admin/products');
     }
 
+    /*************  ✨ Codeium Command ⭐  *************/
+    /**
+     * Edit a product
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    /******  2c24ab53-e4a3-40f2-b269-9ff8237940af  *******/
     public function edit(Product $product)
     {
         return view('admin.editProduct', [
@@ -148,11 +176,12 @@ class ProductController extends Controller
             'price' => ['required'],
             'discounted_percentage' => ['required', 'numeric', 'between:0,100'],
             'slug' => 'required',
-            'image' => ['required', 'max:2048'],
             'description' => 'required',
             'new_arrival' => 'required',
             'top_seller' => 'required',
-            'memory' => 'required',
+            'processor' => 'required',
+            'screen_size' => 'required',
+            'ram' => 'required',
             'storage' => 'required',
             'graphics' => 'required',
             'display' => 'required',
@@ -164,7 +193,10 @@ class ProductController extends Controller
 
         if ($image = request('image')) {
             File::delete(public_path($product->image)); //public/
-            $product->image = '/storage/' . $image->storeAs('products', $image->getClientOriginalName()); ///storage/products/3lEZECb934Jl34nviuyKgh5GaFWTtRkFdFEjgDSF.jpg
+            $product_images = new ProductImage();
+            $product_images->product_image = '/storage/' . $image->storeAs('products', $image->getClientOriginalName());
+            $product_images->product_id = $product->id;
+            $product_images->save();
         }
         $product->name = request('name');
         $product->product_brand_id = request('product_brand_id');
@@ -176,7 +208,9 @@ class ProductController extends Controller
         $product->description = request('description');
         $product->new_arrival = request('new_arrival');
         $product->top_seller = request('top_seller');
-        $product->memory = request('memory');
+        $product->processor = request('processor');
+        $product->screen_size = request('screen_size');
+        $product->ram = request('ram');
         $product->storage = request('storage');
         $product->graphics = request('graphics');
         $product->display = request('display');
@@ -186,7 +220,7 @@ class ProductController extends Controller
         $product->ports_and_connections = request('ports_and_connections');
         $product->update();
 
-        return redirect('admin/productsList');
+        return redirect('/admin/products');
     }
     public function destroy(Product $product)
     {

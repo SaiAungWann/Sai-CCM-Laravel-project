@@ -30,9 +30,7 @@
         {{-- navbar --}}
         <nav class="navbar navbar-expand-xl">
             <div class="container h-100">
-                <a class="navbar-brand" href="index.html">
                     <h1 class="tm-site-title mb-0">Admin Profile</h1>
-                </a>
                 <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fas fa-bars tm-nav-icon"></i>
@@ -41,40 +39,29 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto h-100">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/admin/dashBoard">
-                                {{-- <i class="fa fa-tachometer-alt"></i> --}}
-                                {{-- {{img('accesss/img/dashboard_customize.svg', 20, 20)}} --}}
+                            <a class="nav-link {{ request()->routeIs('admin.dashBoard') ? 'active' : '' }}" href="/admin/dashBoard">
+                               
                                <span>
                                     <img src="{{asset('access/img/dashboard_customize.svg')}}" alt="">
                                 </span>
                                 Dashboard
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/dashBoard')
-                                <span class="sr-only">(current)</span>      
-                                @endif
                             </a>
                         </li>
                     
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/ordersList">
+                            <a class="nav-link {{ request()->routeIs('admin.ordersList') ? 'active' : '' }}" href="/admin/ordersList">
                             {{-- <i class="fas fa-shopping-cart"></i> --}}
                             <span><img src="{{asset('access/img/orders.svg')}}" alt=""></span>
                                 Orders
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/ordersList')
-                                <span class="sr-only">(current)</span>
-                                @endif
                             </a>
                         </li>                      
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('admin.products') ? 'active' : '' }}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                  <img src="{{asset('access/img/shopping_cart.svg')}}" alt="">
                                 <span>
                                     Products <img src="{{asset('access/img/arrow_drop_down.svg')}}" alt="">
                                 </span>
-
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/products')
-                                <span class="sr-only">(current)</span>      
-                                @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/admin/products">Products</a>
@@ -83,49 +70,49 @@
                            </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            <a class="nav-link dropdown-toggle {{ request()->routeIs('admin.account') ? 'active' : '' }}" href="" id="navbarDropdown" role="button" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                                  <i class="far fa-user"></i>
                                 <span>
                                     Accounts <img src="{{asset('access/img/arrow_drop_down.svg')}}" alt="">
                                 </span>
-                                
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/settings')
-                                <span class="sr-only">(current)</span>      
-                                @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">User Accounts</a>
-                                <a class="dropdown-item" href="#">Admin Accounts</a>
+                                <a class="dropdown-item" href="/admin/user/account">User Accounts</a>
+                                <a class="dropdown-item" href="/admin/account">Admin Accounts</a>
                            </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link {{ request()->routeIs('admin.profile.edit') ? 'active' : '' }}"  href="/admin/account/{{auth()->user()->id}}/profile/edit">
                                 <img src="{{asset('access/img/settings.svg')}}" alt="">
                                 <span>
-                                    Settings <img src="{{asset('access/img/arrow_drop_down.svg')}}" alt="">
+                                    Profile Setting
                                 </span>
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/settings')
-                                <span class="sr-only">(current)</span>      
-                                @endif
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">Billing</a>
-                                <a class="dropdown-item" href="#">Customize</a>
-                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link {{ request()->routeIs('admin.profile.edit') ? 'active' : '' }}"  href="/">
+                                <span>
+                                 To Home Page
+                                </span>
+                            </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                           <a class="nav-link" href="/admin/account">
+                            <form
+							action="/logout"
+							method="POST">
+							@csrf
+							<button
+								type="submit"
+                                  class=" w-full btn border rounded-xl btn-danger btn-block text-uppercase"
+                                >            
                                 <i class="far fa-user"></i>
-                                Log Out
-                                @if (request()->path() == 'http://127.0.0.1:8000/admin/account')
-                                <span class="sr-only">(current)</span>      
-                                @endif
-                            </a>
+                                Logout
+                            </button>
+						</form>
+                         
                         </li>
                     </ul>
                 </div>

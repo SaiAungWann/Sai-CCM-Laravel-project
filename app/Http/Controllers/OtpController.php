@@ -8,6 +8,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use PharIo\Manifest\Email;
 
@@ -29,10 +30,17 @@ class OtpController extends Controller
         $DB_otp->expires_at = Carbon::now()->addMinute(1);
         $DB_otp->save();
 
+
         $newOtp = $DB_otp->otp;
 
         Mail::to(auth()->user())->queue(new OtpMail($user, $newOtp));
 
+        if ($DB_otp->expires_at < Carbon::now()) {
+            $DB_otp->otp = null;
+            $DB_otp->expires_at = null;
+            $DB_otp->save();
+            return \back()->with('message', 'Otp Expired');
+        }
         return \back()->with('message', 'Otp Sent Successfully');
     }
 
@@ -81,5 +89,37 @@ class OtpController extends Controller
             'name' => auth()->user()->first_name . " " . auth()->user()->middle_name . " " . auth()->user()->last_name,
             'expires_at' => Carbon::now()->addMinute(1),
         ]);
+    }
+
+    public function forgotPasswordOtp()
+    {
+        request()->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $user = User::where('email', request('email'))->first()->load('otps');
+        if (!$user) {
+            return \back()->with('message', 'Email Not Found');
+        }
+        $otp = random_int(100000, 999999);
+
+        $DB_otp = new Otp();
+        $DB_otp->user_id = $user->id;
+        $DB_otp->otp = $otp;
+        $DB_otp->expires_at = Carbon::now()->addMinute(1);
+        $DB_otp->save();
+
+
+        $newOtp = $DB_otp->otp;
+
+        Mail::to($user->email)->queue(new OtpMail($user, $newOtp));
+
+        if ($DB_otp->expires_at < Carbon::now()) {
+            $DB_otp->otp = null;
+            $DB_otp->expires_at = null;
+            $DB_otp->save();
+            return \back()->with('message', 'Otp Expired');
+        }
+        return \back()->with('message', 'Otp Sent Successfully');
     }
 }

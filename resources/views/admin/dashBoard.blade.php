@@ -1,9 +1,17 @@
 <x-adminLayout>
             {{-- main content --}}
-        <div class="container">
+        <div class="report">
+            <div class=" container col-12 flex flex-wrap ">
             <div class="row">
                 <div class="col">
                     <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+                      <h2 class="text-white mt-5 mb-5"> <b>
+                      Other features are still developed.
+                    </b></h2>
+                    <h2 class="text-white mt-5 mb-5"> <b>
+                        Report Feature is still under development.
+                    </b></h2>
+                  
                 </div>
             </div>
             <!-- row -->
@@ -107,6 +115,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         {{-- main contet --}}

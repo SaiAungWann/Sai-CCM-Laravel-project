@@ -8,21 +8,22 @@
 
 					<!-- aside Widget-->
                         <div id="aside" class="col-md-3 sticky top-0">
+                            @if (auth()->user()->role == 'admin')
+                            <div class="active aside border-b border-green-500 border-3px">
+                                <h3 class="text-white font-bold text-lg"><a href="{{url('/admin/dashBoard')}}">Admin Dashboard</a></h3>
+                            </div>   
+                            @endif
                             <div class="active aside border-b border-green-500 border-3px">
                                 <h3 class="text-white font-bold text-lg"><a href="{{url('/user/'.auth()->user()->id.'/profile')}}">Profile</a></h3>
                             </div>
                             <div class="aside border-b border-green-500 border-3px">
                                 <h3 class="text-white font-bold text-lg"><a href="{{url('/user/'.auth()->user()->id.'/profile/order')}}">My Order</a></h3>
                             </div>
-                    
                             <div class="aside border-b border-green-500 border-3px">
-                                <h3 class="text-white font-bold text-lg"><a href="{{url('/user/'.auth()->user()->id.'/profile/orderHistory')}}">Order History</a></h3>
+                                <h3 class="text-white font-bold text-lg"><a href="{{url('/user/'.auth()->user()->id.'/profile/wishlist')}}">My Wishlist</a></h3>
                             </div>
                             <div class="aside border-b border-green-500 border-3px">
-                                <h3 class="text-white font-bold text-lg"><a href="/wishlist">My Wishlist</a></h3>
-                            </div>
-                            <div class="aside border-b border-green-500 border-3px">
-                                <h3 class="text-white font-bold text-lg"><a href="user/{{auth()->user()->id}}/profile/edit">Profile Setting</a></h3>
+                                <h3 class="text-white font-bold text-lg"><a href="{{url('user/'.auth()->user()->id . '/profile/edit')}}">Profile Setting</a></h3>
                             </div>
                             <div class="aside border-b border-green-500 border-3px">
                                 <form
@@ -43,3 +44,5 @@
                     </div>
                 </div>
             </div>
+
+            <script src="{{asset('./access/js/profile-img.js')}}"></script>

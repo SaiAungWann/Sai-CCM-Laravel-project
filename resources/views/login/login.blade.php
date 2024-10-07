@@ -24,7 +24,7 @@
             <p class="error">{{ $message }}</p>
             @enderror
 
-            <a href="#">Forgot your password?</a>
+            <a href="/user/profile/forgotPassword">Forgot your password?</a>
             <button type="submit">Sign In</button>
         </form>
     </div>
@@ -65,8 +65,6 @@
         </form>
     </div>
 
-
-
     <div class="overlay-container">
         <div class="overlay">
             <div class="overlay-panel  overlay-left ">
@@ -81,10 +79,8 @@
                     <p>Enter your personal details and start journey with us</p>
                     <button herf="/register" class="ghost" id="signUp">Sign Up</button>
                     <br>
-                    {{-- <p>Not Now!!</p> --}}
                      <a href="/"> <button class="ghost" id="signUp">Home Page</button></a>
                 </div>
-            
         </div>
     </div>
 </div>

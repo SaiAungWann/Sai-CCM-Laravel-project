@@ -37,7 +37,7 @@ class UserAddressController extends Controller
             'address_name' => 'required',
             'SRTZ' => 'required',
             'address' => 'required',
-            'telephone' => 'required',
+            'telephone' => 'required ',
             'my_address_is_correct' => 'accepted',
         ], [
             'first_name.required' => 'The First Name field is required.',

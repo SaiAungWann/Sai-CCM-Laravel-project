@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_addresses', function (Blueprint $table) {
             $table->id();
-            $table->string('address_name')->unique();
+            $table->string('address_name');
             $table->boolean('is_default')->default(true);
             $table->string('user_id');
             $table->string('state_or_region_township_zip');

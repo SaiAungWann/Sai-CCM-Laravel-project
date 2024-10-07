@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\User;
 use App\Models\WishList;
 use App\Models\WishListItem;
 use Illuminate\Http\Request;
@@ -34,9 +35,24 @@ class WishListController extends Controller
         return back();
     }
 
+    public function show(WishList $wishList, User $user)
+    {
+
+        return view('userProfile.userWishlist', [
+            'title' => 'Wishlist',
+            'wishList' => $wishList,
+            'user' => $user
+        ]);
+    }
+
     public function destroy(WishListItem $wishListItem)
     {
         $wishListItem->delete();
+        return back();
+    }
+    public function destroyAll(WishList $wishList)
+    {
+        $wishList->delete();
         return back();
     }
 }
